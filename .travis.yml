@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+language: python
+python:
+  - "3.5"
+script:
+  - sh .travis/deploy_dockerhub.sh
+after_success:
+  - sh .travis/deploy_heroku.sh
+notifications:
+  email:
+    recipients:
+      - ivanushkin3@gmail.com
+    on_success: always
+    on_failure: always

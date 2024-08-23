@@ -1,7 +1,11 @@
+"""
+Small task managment program
+:wq! 
+"""
 import sys
 import json
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout
-from PyQt5.QtWidgets import QPushButton, QLineEdit, QListWidget, QLabel, QMessageBox, QDateEdit, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QListWidget, QMessageBox, QDateEdit, QListWidgetItem, QLineEdit
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QDate
 
@@ -65,7 +69,7 @@ class ToDoList:
         Args:
             filename (str, optional): The name of the file to save tasks to. Defaults to 'tasks.json'.
         """
-        with open(filename, "w") as file:
+        with open(filename, "w", encoding="utf-8") as file:
             json.dump(self.tasks, file)
 
     def load_tasks(self, filename="tasks.json"):
@@ -76,7 +80,7 @@ class ToDoList:
             filename (str, optional): The name of the file to load tasks from. Defaults to 'tasks.json'.
         """
         try:
-            with open(filename, "r") as file:
+            with open(filename, "r", encoding="utf-8") as file:
                 self.tasks = json.load(file)
         except FileNotFoundError:
             self.tasks = []
@@ -99,9 +103,9 @@ class ToDoApp(QWidget):
         super().__init__()
         self.todo_list = ToDoList()
         self.todo_list.load_tasks()
-        self.initUI()
+        self.init_UI()
 
-    def initUI(self):
+    def init_UI(self):
         """
         Sets up the user interface including input fields, buttons, and layout.
         """
